@@ -1,8 +1,16 @@
 import React from 'react';
-import {Button, Card, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Button, Card, CardContent, CardMedia, Grid, styled, Typography} from "@mui/material";
 import {useAppDispatch} from "../../../app/hooks";
 import {changeCocktailPublish, deleteCocktail, fetchAllCocktail} from "../cocktailsThunk";
+import {Link as NavLink} from "react-router-dom";
 
+const Link = styled(NavLink)({
+    color: 'inherit',
+    textDecoration: 'none',
+    '&:hover': {
+        color: 'inherit',
+    },
+});
 interface Props {
     id: string,
     name: string,
@@ -11,7 +19,7 @@ interface Props {
 }
 
 const AdminCocktailBlock: React.FC<Props> = ({id, image, name, published}) => {
-    let artistImage = 'http://localhost:8000' + '/images/' + image;
+    let cocktailImage = 'http://localhost:8000' + '/images/' + image;
     const dispatch = useAppDispatch();
 
     const onPublic = async () => {
@@ -34,15 +42,17 @@ const AdminCocktailBlock: React.FC<Props> = ({id, image, name, published}) => {
                     <CardContent>
                         <CardMedia
                             sx={{ height: 240 }}
-                            image={artistImage}
+                            image={cocktailImage}
                             title={name}
+                            component={Link}
+                            to={'/cocktails/' + id}
                         />
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h5" component="div" style={{margin:'10px 0'}}>
                             {name}
                         </Typography>
                         {published ? (
                             <div style={{display: "flex"}}>
-                                <Button variant="outlined" style={{ marginRight: '4px' }} >
+                                <Button variant="outlined" color="success" style={{ marginRight: '4px' }} >
                                     Posted
                                 </Button>
                                 <Button variant="outlined" style={{ marginRight: '4px' }} onClick={onPublic}>

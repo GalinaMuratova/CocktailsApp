@@ -17,7 +17,7 @@ const UsersCocktailsPage = () => {
 
     return (
         <>
-            <h3>My cocktails</h3>
+            <h2>My cocktails</h2>
             {loading ? (
                 <Grid item container justifyContent="center">
                     <CircularProgress />

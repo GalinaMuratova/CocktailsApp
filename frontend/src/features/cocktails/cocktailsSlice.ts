@@ -3,7 +3,7 @@ import {
     changeCocktailPublish,
     createCocktail,
     deleteCocktail,
-    fetchAllCocktail,
+    fetchAllCocktail, fetchOneCocktail,
     fetchPublishedCocktail, fetchUsersCocktail
 } from "./cocktailsThunk";
 import {RootState} from "../../app/store";
@@ -13,9 +13,11 @@ interface CocktailsState {
     publishedItems: Cocktail[],
     items: Cocktail[],
     usersItems:Cocktail[],
+    item: Cocktail | null,
     fetchAllLoading: boolean;
     fetchAllUsersLoading: boolean;
     fetchPublishedLoading: boolean;
+    fetchOneLoading: boolean;
     createLoading: boolean;
     changeLoading: boolean;
     deleteLoading: boolean;
@@ -25,9 +27,11 @@ const initialState: CocktailsState = {
     publishedItems:[],
     items:[],
     usersItems:[],
+    item:null,
     fetchAllLoading:false,
     fetchAllUsersLoading: false,
     fetchPublishedLoading: false,
+    fetchOneLoading:false,
     createLoading:false,
     changeLoading: false,
     deleteLoading: false
@@ -71,6 +75,17 @@ export const cocktailsSlice = createSlice({
             state.fetchAllUsersLoading = false;
         });
 
+        builder.addCase(fetchOneCocktail.pending, (state) => {
+            state.fetchOneLoading = true;
+        });
+        builder.addCase(fetchOneCocktail.fulfilled, (state, {payload: cocktail} ) => {
+            state.fetchOneLoading = false;
+            state.item = cocktail;
+        });
+        builder.addCase(fetchOneCocktail.rejected, (state) => {
+            state.fetchOneLoading = false;
+        });
+
         builder.addCase(createCocktail.pending, (state) => {
             state.createLoading = true;
         });
@@ -109,5 +124,7 @@ export const selectPublishedCocktails = (state: RootState) => state.cocktailsRed
 export const selectPublishedCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchPublishedLoading;
 export const selectCocktails = (state: RootState) => state.cocktailsReducer.items;
 export const selectCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchAllLoading;
+export const selectOneCocktail = (state: RootState) => state.cocktailsReducer.item;
+export const selectOneCocktailLoading = (state: RootState) => state.cocktailsReducer.fetchOneLoading;
 export const selectUsersCocktails =(state: RootState) => state.cocktailsReducer.usersItems;
-export const selectUsersCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchAllLoading;
+export const selectUsersCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchAllUsersLoading;

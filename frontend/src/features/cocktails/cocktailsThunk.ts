@@ -2,19 +2,33 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {Cocktail, CocktailMutationNew} from "../../types";
 import axiosApi from "../../axiosApi";
 
-export const fetchPublishedCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAllPublished', async () => {
-    const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails/published');
-    return artistsResponse.data;
+export const fetchPublishedCocktail = createAsyncThunk<Cocktail[]>(
+    'cocktails/fetchAllPublished',
+    async () => {
+    const cocktailResponse = await axiosApi.get<Cocktail[]>('/cocktails/published');
+    return cocktailResponse.data;
 });
-export const fetchAllCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAll', async () => {
-    const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails');
-    return artistsResponse.data;
+export const fetchAllCocktail = createAsyncThunk<Cocktail[]>(
+    'cocktails/fetchAll',
+    async () => {
+    const cocktailResponse = await axiosApi.get<Cocktail[]>('/cocktails');
+    return cocktailResponse.data;
 });
 
-export const fetchUsersCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAllUsers', async () => {
-    const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails/user');
-    return artistsResponse.data;
+export const fetchUsersCocktail = createAsyncThunk<Cocktail[]>(
+    'cocktails/fetchAllUsers',
+    async () => {
+    const cocktailResponse = await axiosApi.get<Cocktail[]>('/cocktails/user');
+    return cocktailResponse.data;
 });
+
+export const fetchOneCocktail  =createAsyncThunk<Cocktail, string>(
+    'cocktails/fetchOne',
+    async (id) => {
+        const cocktailResponse = await axiosApi.get<Cocktail>(`/cocktails/${id}`);
+        return cocktailResponse.data;
+    }
+);
 export const createCocktail = createAsyncThunk<void, CocktailMutationNew>(
     'cocktails/create',
     async (cocktailMut) => {

@@ -8,6 +8,7 @@ import Login from "./features/users/Login";
 import CocktailForm from "./features/cocktails/components/CocktailsForm";
 import AdminPage from "./features/cocktails/AdminPage";
 import UsersCocktailsPage from "./features/cocktails/UsersCocktailsPage";
+import OneCocktailInformation from "./features/cocktails/OneCocktailInformation";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path='/cocktails/new' element={<CocktailForm />} />
                         <Route path='/cocktails/admin' element={<AdminPage />} />
                         <Route path ='/my_cocktails' element={<UsersCocktailsPage />} />
+                        <Route path='/cocktails/:id' element={<OneCocktailInformation  />} />
                     </Routes>
                 </Container>
             </main>

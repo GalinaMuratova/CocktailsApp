@@ -26,7 +26,7 @@ const AdminPage = () => {
     }, [dispatch]);
     return (
         <>
-            <h3>Admin Page</h3>
+            <h2>Admin Page</h2>
             {loading ? (
                 <Grid item container justifyContent="center">
                     <CircularProgress />

@@ -19,19 +19,22 @@ interface Props {
 }
 
 const CocktailBlock: React.FC<Props> = ({id, image, name, published}) => {
-    let artistImage = 'http://localhost:8000' + '/images/' + image;
+    let cocktailImage = 'http://localhost:8000' + '/images/' + image;
 
-    let posted = <Button variant="outlined"  style={{ marginRight: '20px' }} >
-        Posted
-    </Button>;
-    if (published === true) {
-        posted = <Button variant="outlined"  style={{ marginRight: '20px' }} >
+    let posted =
+        <Button variant="outlined"  style={{ marginRight: '20px' }} >
             Posted
         </Button>;
+    if (published === true) {
+        posted =
+            <Button variant="outlined"  style={{ marginRight: '20px' }} >
+                Posted
+            </Button>;
     } else if (published === false) {
-        posted = <Button variant="outlined"  style={{ marginRight: '20px', color:'gray', borderColor:'gray'}} >
-            Not published
-        </Button>;
+        posted =
+            <Button variant="outlined"  style={{ marginRight: '20px', color:'gray', borderColor:'gray'}} >
+                Not published
+            </Button>;
     }
 
     return (
@@ -41,7 +44,7 @@ const CocktailBlock: React.FC<Props> = ({id, image, name, published}) => {
                     <CardContent>
                         <CardMedia
                             sx={{ height: 240 }}
-                            image={artistImage}
+                            image={cocktailImage}
                             title={name}
                             component={Link}
                             to={'/cocktails/' + id}
