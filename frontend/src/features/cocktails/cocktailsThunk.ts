@@ -6,6 +6,10 @@ export const fetchPublishedCocktail = createAsyncThunk<Cocktail[]>('cocktails/fe
     const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails/published');
     return artistsResponse.data;
 });
+export const fetchAllCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAll', async () => {
+    const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails');
+    return artistsResponse.data;
+});
 export const createCocktail = createAsyncThunk<void, CocktailMutationNew>(
     'cocktails/create',
     async (cocktailMut) => {
@@ -25,6 +29,20 @@ export const createCocktail = createAsyncThunk<void, CocktailMutationNew>(
 
         await axiosApi.post('/cocktails', formData);
     },
+);
+
+export const changeCocktailPublish = createAsyncThunk<void, string>(
+    'cocktails/changePublish',
+    async (id) => {
+        await axiosApi.patch(`/cocktails/${id}/togglePublished`);
+    },
+);
+
+export const deleteCocktail = createAsyncThunk<void, string>(
+    'cocktails/delete',
+    async (id) => {
+    await axiosApi.delete(`/cocktails/${id}`);
+    }
 );
 
 

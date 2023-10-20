@@ -15,6 +15,7 @@ interface Props {
     id: string,
     name: string,
     image: string,
+    published?: boolean
 }
 
 const CocktailBlock: React.FC<Props> = ({id, image, name}) => {

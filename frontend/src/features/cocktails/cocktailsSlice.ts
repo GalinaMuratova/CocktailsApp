@@ -1,18 +1,32 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createCocktail, fetchPublishedCocktail} from "./cocktailsThunk";
+import {
+    changeCocktailPublish,
+    createCocktail,
+    deleteCocktail,
+    fetchAllCocktail,
+    fetchPublishedCocktail
+} from "./cocktailsThunk";
 import {RootState} from "../../app/store";
 import {Cocktail} from "../../types";
 
 interface CocktailsState {
-    items: Cocktail[]
+    publishedItems: Cocktail[],
+    items: Cocktail[],
+    fetchAllLoading: boolean;
     fetchPublishedLoading: boolean;
     createLoading: boolean;
+    changeLoading: boolean;
+    deleteLoading: boolean;
 }
 
 const initialState: CocktailsState = {
+    publishedItems:[],
     items:[],
+    fetchAllLoading:false,
     fetchPublishedLoading: false,
-    createLoading:false
+    createLoading:false,
+    changeLoading: false,
+    deleteLoading: false
 }
 
 export const cocktailsSlice = createSlice({
@@ -25,10 +39,21 @@ export const cocktailsSlice = createSlice({
         });
         builder.addCase(fetchPublishedCocktail.fulfilled, (state, { payload: cocktails }) => {
             state.fetchPublishedLoading = false;
-            state.items = cocktails;
+            state.publishedItems = cocktails;
         });
         builder.addCase(fetchPublishedCocktail.rejected, (state) => {
             state.fetchPublishedLoading = false;
+        });
+
+        builder.addCase(fetchAllCocktail.pending, (state) => {
+            state.fetchAllLoading = true;
+        });
+        builder.addCase(fetchAllCocktail.fulfilled, (state, { payload: cocktails }) => {
+            state.fetchAllLoading = false;
+            state.items = cocktails;
+        });
+        builder.addCase(fetchAllCocktail.rejected, (state) => {
+            state.fetchAllLoading = false;
         });
 
         builder.addCase(createCocktail.pending, (state) => {
@@ -40,10 +65,32 @@ export const cocktailsSlice = createSlice({
         builder.addCase(createCocktail.rejected, (state) => {
             state.createLoading = false;
         });
+
+        builder.addCase(changeCocktailPublish.pending, (state) => {
+            state.changeLoading = true;
+        });
+        builder.addCase(changeCocktailPublish.fulfilled, (state) => {
+            state.changeLoading = false;
+        });
+        builder.addCase(changeCocktailPublish.rejected, (state) => {
+            state.changeLoading = false;
+        });
+
+        builder.addCase(deleteCocktail.pending, (state) => {
+            state.deleteLoading = true;
+        });
+        builder.addCase(deleteCocktail.fulfilled, (state) => {
+            state.deleteLoading = false;
+        });
+        builder.addCase(deleteCocktail.rejected, (state) => {
+            state.deleteLoading = false;
+        });
     }
 });
 
 export const cocktailsReducer = cocktailsSlice.reducer;
 export const selectCreateCocktailLoading = (state: RootState) => state.cocktailsReducer.createLoading;
-export const selectPublishedCocktails = (state: RootState) => state.cocktailsReducer.items;
+export const selectPublishedCocktails = (state: RootState) => state.cocktailsReducer.publishedItems;
 export const selectPublishedCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchPublishedLoading;
+export const selectCocktails = (state: RootState) => state.cocktailsReducer.items;
+export const selectCocktailsLoading = (state: RootState) => state.cocktailsReducer.fetchAllLoading;

@@ -6,6 +6,7 @@ import Cocktails from "./features/cocktails/Cocktails";
 import Register from "./features/users/Register";
 import Login from "./features/users/Login";
 import CocktailForm from "./features/cocktails/components/CocktailsForm";
+import AdminPage from "./features/cocktails/AdminPage";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path='/register' element={<Register/>}/>
                         <Route path='/login' element={<Login/>}/>
                         <Route path='/cocktails/new' element={<CocktailForm />} />
+                        <Route path='/cocktails/admin' element={<AdminPage />} />
                     </Routes>
                 </Container>
             </main>
