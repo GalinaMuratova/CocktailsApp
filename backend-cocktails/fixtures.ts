@@ -39,13 +39,41 @@ const run = async () => {
             recipe: 'Combine vodka and tomato juice in a mixing glass. Add salt, black pepper, cayenne pepper, lemon juice, and Worcestershire sauce. Add ice and stir well. Strain the mixture into a highball glass over ice. Garnish with a celery stalk and lemon wedge.',
             ingredients: [
                 {
-                    ingredientName: 'Vodka',
-                    quantity: '2 ounces'
+                    ingredientName: "Vodka",
+                    quantity: "2 ounces"
                 },
                 {
-                    ingredientName: 'Tomato juice',
-                    quantity: '4 ounces'
+                    ingredientName: "Tomato juice",
+                    quantity: "4 ounces"
                 },
+                {
+                    ingredientName: "Salt",
+                    quantity: "1 pinch"
+                },
+                {
+                    ingredientName: "Black pepper",
+                    quantity: "1 pinch"
+                },
+                {
+                    ingredientName: "Cayenne pepper",
+                    quantity: "1 pinch"
+                },
+                {
+                    ingredientName: "Lemon juice",
+                    quantity: "1 dash"
+                },
+                {
+                    ingredientName: "Worcestershire sauce",
+                    quantity: "1 dash"
+                },
+                {
+                    ingredientName: "Celery stalk",
+                    quantity: "1 piece"
+                },
+                {
+                    ingredientName: "Lemon wedge",
+                    quantity: "1 piece"
+                }
             ],
             image: 'bloody-mary.jpg',
             user: user1._id,
@@ -56,16 +84,20 @@ const run = async () => {
             recipe: 'Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.',
             ingredients: [
                 {
-                    ingredientName: 'Tequila',
-                    quantity: '1/2 ounces'
+                    ingredientName: "Tequila",
+                    quantity: "1 1/2 ounces"
                 },
                 {
-                    ingredientName: 'Lime juice',
-                    quantity: '1 ounce'
+                    ingredientName: "Cointreau",
+                    quantity: "1/2 ounce"
                 },
                 {
-                    ingredientName: 'Salt',
-                    quantity: '1 tablespoon'
+                    ingredientName: "Lime juice",
+                    quantity: "1 ounce"
+                },
+                {
+                    ingredientName: "Salt",
+                    quantity: "1 tablespoon"
                 }
             ],
             image: 'Margarita.jpg',
@@ -115,16 +147,24 @@ const run = async () => {
             recipe: 'Muddle the mint leaves with simple syrup and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish with sprig of mint leaves and lemon slice.',
             ingredients: [
                 {
-                    ingredientName: 'White rum',
-                    quantity: '2 ounces'
+                    ingredientName: "White rum",
+                    quantity: "2 ounces"
                 },
                 {
-                    ingredientName: 'Lime juice',
-                    quantity: '1 ounce'
+                    ingredientName: "Lime juice",
+                    quantity: "1 ounce"
                 },
                 {
-                    ingredientName: 'Simple syrup',
-                    quantity: '2 teaspoons'
+                    ingredientName: "Simple syrup",
+                    quantity: "2 teaspoons"
+                },
+                {
+                    ingredientName: "Mint leaves",
+                    quantity: "4 sprigs"
+                },
+                {
+                    ingredientName: "Soda water",
+                    quantity: "1/2 cup"
                 }
             ],
             image: 'mojito.webp',
