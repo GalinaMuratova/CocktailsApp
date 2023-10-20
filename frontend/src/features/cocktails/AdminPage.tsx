@@ -34,7 +34,7 @@ const AdminPage = () => {
             ) : (
                 <Grid container item spacing={2}>
                     {cocktails.map((el) => (
-                        <AdminCocktailBlock id={el._id} name={el.name} image={el.image!} published={el.published} />
+                        <AdminCocktailBlock key={el._id} id={el._id} name={el.name} image={el.image!} published={el.published} />
                     ))}
                 </Grid>
             )}

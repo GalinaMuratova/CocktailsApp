@@ -18,8 +18,22 @@ interface Props {
     published?: boolean
 }
 
-const CocktailBlock: React.FC<Props> = ({id, image, name}) => {
+const CocktailBlock: React.FC<Props> = ({id, image, name, published}) => {
     let artistImage = 'http://localhost:8000' + '/images/' + image;
+
+    let posted = <Button variant="outlined"  style={{ marginRight: '20px' }} >
+        Posted
+    </Button>;
+    if (published === true) {
+        posted = <Button variant="outlined"  style={{ marginRight: '20px' }} >
+            Posted
+        </Button>;
+    } else if (published === false) {
+        posted = <Button variant="outlined"  style={{ marginRight: '20px', color:'gray', borderColor:'gray'}} >
+            Not published
+        </Button>;
+    }
+
     return (
         <>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -35,9 +49,7 @@ const CocktailBlock: React.FC<Props> = ({id, image, name}) => {
                         <Typography gutterBottom variant="h5" component="div">
                             {name}
                         </Typography>
-                        <Button variant="outlined"  style={{ marginRight: '20px' }} >
-                            Posted
-                        </Button>
+                        {posted}
                     </CardContent>
                 </Card>
             </Grid>

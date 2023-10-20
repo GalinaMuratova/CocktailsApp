@@ -1,21 +1,23 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {selectPublishedCocktails, selectPublishedCocktailsLoading} from "./cocktailsSlice";
+import {selectUsersCocktails, selectUsersCocktailsLoading} from "./cocktailsSlice";
+import {fetchUsersCocktail} from "./cocktailsThunk";
 import {CircularProgress, Grid} from "@mui/material";
 import CocktailBlock from "./components/CocktailBlock";
-import {fetchPublishedCocktail} from "./cocktailsThunk";
 
-const Cocktails = () => {
+const UsersCocktailsPage = () => {
     const dispatch = useAppDispatch();
-    const cocktails = useAppSelector(selectPublishedCocktails);
-    const loading = useAppSelector(selectPublishedCocktailsLoading);
+    const cocktails = useAppSelector(selectUsersCocktails);
+    const loading = useAppSelector(selectUsersCocktailsLoading);
 
     useEffect(() => {
-        dispatch(fetchPublishedCocktail());
+        dispatch(fetchUsersCocktail());
     }, [dispatch]);
+
 
     return (
         <>
+            <h3>My cocktails</h3>
             {loading ? (
                 <Grid item container justifyContent="center">
                     <CircularProgress />
@@ -23,7 +25,7 @@ const Cocktails = () => {
             ) : (
                 <Grid container item spacing={2}>
                     {cocktails.map((el) => (
-                        <CocktailBlock key={el._id} id={el._id} name={el.name} image={el.image!} />
+                        <CocktailBlock id={el._id} name={el.name} image={el.image!} key={el._id} published={el.published} />
                     ))}
                 </Grid>
             )}
@@ -31,4 +33,4 @@ const Cocktails = () => {
     );
 };
 
-export default Cocktails;
+export default UsersCocktailsPage;

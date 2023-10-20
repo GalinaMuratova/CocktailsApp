@@ -10,6 +10,11 @@ export const fetchAllCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAll
     const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails');
     return artistsResponse.data;
 });
+
+export const fetchUsersCocktail = createAsyncThunk<Cocktail[]>('cocktails/fetchAllUsers', async () => {
+    const artistsResponse = await axiosApi.get<Cocktail[]>('/cocktails/user');
+    return artistsResponse.data;
+});
 export const createCocktail = createAsyncThunk<void, CocktailMutationNew>(
     'cocktails/create',
     async (cocktailMut) => {

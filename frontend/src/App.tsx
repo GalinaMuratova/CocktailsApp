@@ -7,6 +7,7 @@ import Register from "./features/users/Register";
 import Login from "./features/users/Login";
 import CocktailForm from "./features/cocktails/components/CocktailsForm";
 import AdminPage from "./features/cocktails/AdminPage";
+import UsersCocktailsPage from "./features/cocktails/UsersCocktailsPage";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                         <Route path='/login' element={<Login/>}/>
                         <Route path='/cocktails/new' element={<CocktailForm />} />
                         <Route path='/cocktails/admin' element={<AdminPage />} />
+                        <Route path ='/my_cocktails' element={<UsersCocktailsPage />} />
                     </Routes>
                 </Container>
             </main>
