@@ -11,6 +11,7 @@ import {
     REHYDRATE,
 } from 'redux-persist';
 import {usersReducer} from "../features/users/userSlice";
+import {cocktailsReducer} from "../features/cocktails/cocktailsSlice";
 
 const usersPersistConfig = {
     key: 'musicApp:users',
@@ -20,6 +21,7 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
     usersReducer: persistReducer(usersPersistConfig, usersReducer),
+    cocktailsReducer: cocktailsReducer,
 });
 export const store = configureStore({
     reducer: rootReducer,

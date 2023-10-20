@@ -38,6 +38,13 @@ export interface Cocktail {
     }]
 }
 
+export interface CocktailMutationNew {
+    name: string,
+    image: string|null,
+    recipe: string,
+    ingredients: Ingredient[]
+}
+
 export interface CocktailMutation {
     name: string,
     image: string|null,

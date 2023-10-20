@@ -3,6 +3,7 @@ import Cocktail from '../models/Cocktail';
 import auth, {RequestWithUser} from "../middleware/auth";
 import {imagesUpload} from "../multer";
 import permit from "../middleware/permit";
+import {Ingredient} from "../types";
 
 
 const cocktailsRouter =express.Router();
@@ -58,11 +59,16 @@ cocktailsRouter.get('/:id', async (req, res) => {
 cocktailsRouter.post('/', auth, imagesUpload.single('image'), async (req,  res) => {
     const user = (req as RequestWithUser).user;
     try {
+        const ingredients = JSON.parse(req.body.ingredients);
+        const formattedIngredients = ingredients.map((ingredient: Ingredient) => ({
+            ingredientName: ingredient.ingredientName,
+            quantity: ingredient.quantity,
+        }));
        const cocktail = new Cocktail({
            user: user._id,
            name:req.body.name,
            recipe: req.body.recipe,
-           ingredients: req.body.ingredients,
+           ingredients: formattedIngredients,
            image: req.file ? req.file.filename : null,
        })
         await cocktail.save();

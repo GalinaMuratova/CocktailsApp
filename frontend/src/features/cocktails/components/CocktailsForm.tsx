@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Grid, TextField, Button, Typography} from '@mui/material';
 import {CocktailMutation, Ingredient} from "../../../types";
 import FileInput from "../../../components/UI/FileInput/FileInput";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {useNavigate} from "react-router-dom";
+import {selectCreateCocktailLoading} from "../cocktailsSlice";
+import {createCocktail} from "../cocktailsThunk";
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
+import {selectUser} from "../../users/userSlice";
 
 
 const CocktailForm: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const loading = useAppSelector(selectCreateCocktailLoading);
     const [ingredients, setIngredients] = useState<Ingredient[]>([{
         ingredientName: '',
         quantity: ''
@@ -15,6 +25,13 @@ const CocktailForm: React.FC = () => {
         recipe: '',
         ingredients: [],
     });
+    const user = useAppSelector(selectUser);
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -41,11 +58,16 @@ const CocktailForm: React.FC = () => {
         setIngredients(newIngredients);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const newCocktail = { ...cocktail, ingredients: ingredients };
-
-        console.log(newCocktail)
+        try {
+            await dispatch(createCocktail(newCocktail)).unwrap();
+            alert('Your cocktail is being reviewed by a moderator');
+            navigate('/');
+        } catch (e) {
+            alert('Invalid field')
+        }
     };
 
     const filesInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,12 +136,18 @@ const CocktailForm: React.FC = () => {
                             </Button>
                         </div>
                     ))}
-
                 </Grid>
-                <Grid item>
-                    <Button variant='contained' type='submit'>
-                        Submit
-                    </Button>
+                <Grid item xs>
+                    <LoadingButton
+                        type="submit"
+                        size="small"
+                        endIcon={<SendIcon />}
+                        loading={loading}
+                        loadingPosition="end"
+                        variant="contained"
+                    >
+                        <span>Send</span>
+                    </LoadingButton>
                 </Grid>
             </Grid>
         </form>
