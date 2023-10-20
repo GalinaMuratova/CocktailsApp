@@ -32,6 +32,12 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             avatarImage = 'http://localhost:8000' + '/images/' + user.avatar;
         }
     }
+    let userRole = <></>;
+    if (user.role === 'admin') {
+        userRole = <Button color="inherit" component={Link} to="/cocktails/admin">
+            Admin
+        </Button>
+    }
 
     return (
         <>
@@ -52,6 +58,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             <Button color="inherit" component={Link} to="/cocktails/new">
                 Add cocktail
             </Button>
+            {userRole}
 
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem>Profile</MenuItem>
