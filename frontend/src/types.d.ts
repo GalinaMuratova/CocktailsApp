@@ -20,6 +20,31 @@ export interface User {
     displayName: string;
 }
 
+interface Ingredient {
+    ingredientName: string;
+    quantity: string;
+}
+
+export interface Cocktail {
+    _id: string,
+    user: string,
+    name: string,
+    image: string|null,
+    recipe: string,
+    published: boolean,
+    ingredients: [{
+        ingredientName: string,
+        quantity: string
+    }]
+}
+
+export interface CocktailMutation {
+    name: string,
+    image: string|null,
+    recipe: string,
+    ingredients: []
+}
+
 export interface RegisterResponse {
     user: User;
     message: string;

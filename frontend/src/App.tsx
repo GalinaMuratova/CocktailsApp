@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import Cocktails from "./features/cocktails/Cocktails";
 import Register from "./features/users/Register";
 import Login from "./features/users/Login";
+import CocktailForm from "./features/cocktails/components/CocktailsForm";
 
 function App() {
     return (
@@ -17,8 +18,9 @@ function App() {
                 <Container>
                     <Routes>
                         <Route path='/' element={< Cocktails/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/login" element={<Login/>}/>
+                        <Route path='/register' element={<Register/>}/>
+                        <Route path='/login' element={<Login/>}/>
+                        <Route path='/cocktails/new' element={<CocktailForm />} />
                     </Routes>
                 </Container>
             </main>
